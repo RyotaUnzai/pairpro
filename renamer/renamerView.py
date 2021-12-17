@@ -19,4 +19,4 @@ class view(QMainWindow):
     def __init__(self, parent=None, *args, **kwargs):
         super(view, self).__init__(parent, *args, **kwargs)
         self.parent = parent
-        #self.setCentralWidget(uiClass(parent=self.parent))
+        self.setCentralWidget(uiClass())

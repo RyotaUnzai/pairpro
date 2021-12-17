@@ -17,7 +17,7 @@
    <item>
     <widget class="QLabel" name="label">
      <property name="text">
-      <string>CustomMayaStyle</string>
+      <string>Renamer</string>
      </property>
     </widget>
    </item>
