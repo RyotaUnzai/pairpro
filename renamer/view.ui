@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
+    <width>698</width>
     <height>298</height>
    </rect>
   </property>
@@ -33,7 +33,7 @@
      <item>
       <widget class="QLineEdit" name="lineedit_base_file">
        <property name="text">
-        <string>C:\Users\Tack2\Documents\gitProjects\pairpro\renamer\sample\tx_apple.fbx</string>
+        <string>D:\python\pairpro\renamer\sample\tx_apple.fbx</string>
        </property>
       </widget>
      </item>
@@ -42,16 +42,16 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
-      <widget class="QLineEdit" name="lineEdit">
+      <widget class="QLineEdit" name="lineedit_old">
        <property name="text">
-        <string>old</string>
+        <string>tx</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="lineEdit_2">
+      <widget class="QLineEdit" name="lineedit_new">
        <property name="text">
-        <string>new</string>
+        <string>fbx</string>
        </property>
       </widget>
      </item>
