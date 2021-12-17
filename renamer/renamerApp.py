@@ -22,7 +22,7 @@ class renamerApp(QApplication):
         self.__delegate = None
 
     @classmethod
-    def model(cls):
+    def model(cls) -> renamerModel.model:
         return cls.__model
 
     @classmethod
@@ -30,7 +30,7 @@ class renamerApp(QApplication):
         cls.__model = value
 
     @classmethod
-    def view(cls):
+    def view(cls) -> renamerView.view:
         return cls.__view
 
     @classmethod
@@ -38,7 +38,7 @@ class renamerApp(QApplication):
         cls.__view = value
 
     @classmethod
-    def delegate(cls):
+    def delegate(cls) -> renamerDelegate.delegate:
         return cls.__delegate
 
     @classmethod

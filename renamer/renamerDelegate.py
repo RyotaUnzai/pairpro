@@ -10,6 +10,9 @@ except ImportError:
 
 import os
 
+import renamerModel
+import renamerView
+
 
 class delegateAttr(object):
     def __init__(self, view=None, model=None, *args, **kwargs):
@@ -18,7 +21,7 @@ class delegateAttr(object):
         self.__centralWidget = None
 
     @property
-    def model(self):
+    def model(self) -> renamerModel.model:
         return self.__model
 
     @model.setter
@@ -26,7 +29,7 @@ class delegateAttr(object):
         self.__model = value
 
     @property
-    def view(self):
+    def view(self) -> renamerView.view:
         return self.__view
 
     @view.setter
@@ -53,6 +56,7 @@ class delegate(delegateAttr):
 
     def __initUI(self):
         self.__initCentralWidgetUI()
+        self.consecutiveNumber()
 
     def __initCentralWidgetUI(self):
         self.centralWidget.button_apply.clicked.connect(self.rename)
@@ -61,6 +65,8 @@ class delegate(delegateAttr):
 
     def rename(self):
         base_file_path = self.centralWidget.lineedit_base_file.text()
+
+        # TODO: modelに移行予定
         new = self.centralWidget.lineedit_new.text()
         old = self.centralWidget.lineedit_old.text()
         print("base_file_path", base_file_path)
@@ -71,11 +77,21 @@ class delegate(delegateAttr):
         base_dir = os.path.dirname(base_file_path)
 
         new_name = self.model.replace(base_name, old, new)
-
-        # fstring
         new_file_path = os.path.join(base_dir, f"{new_name}{ext}")
 
-
-        result =  os.rename(base_file_path, new_file_path)
-        print(result)
+        result = self.model.rename(base_file_path, new_file_path)
+        print("result", result)
         ...
+
+    def consecutiveNumber(self):
+        base_file_path = self.centralWidget.lineedit_base_file.text()
+
+        # GUIの値を取る
+
+        base_name, ext = os.path.splitext(os.path.basename(base_file_path))
+        base_dir = os.path.dirname(base_file_path)
+
+        new_name = self.model.consecutiveNumber(base_name, 1, 3)
+
+        new_file_path = os.path.join(base_dir, f"{new_name}{ext}")
+        print("new_file_path", new_file_path)
