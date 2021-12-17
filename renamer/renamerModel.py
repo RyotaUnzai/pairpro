@@ -6,3 +6,6 @@ class model(object):
 
     def debug(self):
         print ("debug")
+
+    def replace(self, base, old, new):
+        return base.replace(old, new)

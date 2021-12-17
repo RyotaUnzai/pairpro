@@ -22,7 +22,32 @@
     </widget>
    </item>
    <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QLineEdit" name="lineEdit">
+       <property name="text">
+        <string>old</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="lineEdit_2">
+       <property name="text">
+        <string>new</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
     <layout class="QFormLayout" name="formLayout"/>
+   </item>
+   <item>
+    <widget class="QLineEdit" name="lineEdit_3">
+     <property name="text">
+      <string>D:\python\pairpro\renamer\sample</string>
+     </property>
+    </widget>
    </item>
    <item>
     <widget class="QPushButton" name="pushButton">
