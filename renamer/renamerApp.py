@@ -9,10 +9,10 @@ try:
 except ImportError:
     from PySide2.QtWidgets import *
 
-
+import renamerDelegate
 import renamerModel
 import renamerView
-import renamerDelegate
+
 
 class renamerApp(QApplication):
     def __init__(self, *args, **kwargs):
@@ -48,7 +48,6 @@ class renamerApp(QApplication):
         return cls.__delegate
 
 
-
 def main():
     app = renamerApp(sys.argv)
     app.view = renamerView.view()
@@ -59,6 +58,7 @@ def main():
     )
     app.view.show()
     sys.exit(app.exec_())
+
 
 if __name__ == '__main__':
     main()

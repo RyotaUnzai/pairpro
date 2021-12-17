@@ -1,13 +1,14 @@
 # -*- coding: utf-8 -*-
 
 try:
-    from PySide.QtGui import *
     from PySide.QtCore import *
+    from PySide.QtGui import *
 except ImportError:
-    from PySide2.QtWidgets import *
-    from PySide2.QtGui import *
     from PySide2.QtCore import *
+    from PySide2.QtGui import *
+    from PySide2.QtWidgets import *
 
+import os
 
 
 class delegateAttr(object):
@@ -54,5 +55,11 @@ class delegate(delegateAttr):
         self.initCentralWidgetUI()
 
     def initCentralWidgetUI(self):
-        pass
-        #self.__centralWidget.pushButton.clicked.connect(self.__model.debug)
+        self.__centralWidget.button_apply.clicked.connect(self.rename)
+        ...
+        # self.__centralWidget.pushButton.clicked.connect(self.__model.debug)
+
+    def rename(self):
+        base_file_path = self.__centralWidget.lineedit_base_file.text()
+        print("base_file_path", base_file_path)
+        ...
