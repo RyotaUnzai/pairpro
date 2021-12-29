@@ -31,7 +31,12 @@ class model(object):
 
     def load_json(self, path) -> tp.Dict[str]:
         with open(path, mode="r", encoding="utf-8") as f:
-            data = json.load(f)
-            return data
+            self.__config  = json.load(f)
+            return self.__config
 
         ...
+
+    def getOperationMode(self, operationName):
+        return self.__config["operations"][operationName]["mode"]
+
+

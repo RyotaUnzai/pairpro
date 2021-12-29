@@ -51,6 +51,7 @@ class delegate(delegateAttr):
         self.model = model
         self.view = view
         self.centralWidget = self.view.centralWidget()
+        self.listModel = QStringListModel()
 
         self.__config = None
         self.__initUI()
@@ -58,12 +59,31 @@ class delegate(delegateAttr):
     def __initUI(self):
         """UI初期化
         """
-        self.__initCentralWidgetUI()
+        
         self.load_config()
+        self.__initCentralWidgetUI()
         self.consecutiveNumber()
 
     def __initCentralWidgetUI(self):
+        self.centralWidget.frame_replace.hide()
+        self.centralWidget.frame_fix.hide()
+        self.centralWidget.frame_consecutiveNumber.hide()
+
         self.centralWidget.button_apply.clicked.connect(self.rename)
+        self.listModel.setStringList(self.collect_operation())
+        self.centralWidget.combo_mode.setModel(self.listModel)
+        self.centralWidget.combo_mode.currentTextChanged.connect(self.changeLayout)
+
+
+
+        
+    def changeLayout(self):
+        operation_mode = self.model.getOperationMode(
+            self.centralWidget.combo_mode.currentText()
+        )
+        frame_mode = f"frame_{OperationMode}"
+
+        f"self.centralWidget.{frame_mode}.show()"
 
     def rename(self):
         """リネーム
