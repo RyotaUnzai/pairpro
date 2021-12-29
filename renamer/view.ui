@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>662</width>
-    <height>262</height>
+    <width>252</width>
+    <height>216</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -40,14 +40,21 @@
     </layout>
    </item>
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout">
+    <layout class="QHBoxLayout" name="horizontalLayout_4">
      <item>
-      <widget class="QRadioButton" name="radioButton">
+      <widget class="QLabel" name="label_3">
        <property name="text">
-        <string>RadioButton</string>
+        <string>Mode</string>
        </property>
       </widget>
      </item>
+     <item>
+      <widget class="QComboBox" name="combo_mode"/>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
       <widget class="QLineEdit" name="lineedit_old">
        <property name="text">

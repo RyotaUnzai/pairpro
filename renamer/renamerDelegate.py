@@ -52,18 +52,22 @@ class delegate(delegateAttr):
         self.view = view
         self.centralWidget = self.view.centralWidget()
 
+        self.__config = None
         self.__initUI()
 
     def __initUI(self):
+        """UI初期化
+        """
         self.__initCentralWidgetUI()
+        self.load_config()
         self.consecutiveNumber()
 
     def __initCentralWidgetUI(self):
         self.centralWidget.button_apply.clicked.connect(self.rename)
-        ...
-        # self.__centralWidget.pushButton.clicked.connect(self.__model.debug)
 
     def rename(self):
+        """リネーム
+        """
         base_file_path = self.centralWidget.lineedit_base_file.text()
 
         # TODO: modelに移行予定
@@ -84,10 +88,11 @@ class delegate(delegateAttr):
         ...
 
     def consecutiveNumber(self):
+        """連番
+        """
         base_file_path = self.centralWidget.lineedit_base_file.text()
 
         # GUIの値を取る
-
         base_name, ext = os.path.splitext(os.path.basename(base_file_path))
         base_dir = os.path.dirname(base_file_path)
 
@@ -95,3 +100,15 @@ class delegate(delegateAttr):
 
         new_file_path = os.path.join(base_dir, f"{new_name}{ext}")
         print("new_file_path", new_file_path)
+
+    def load_config(self):
+        data = self.model.load_json("renamer/settings.json")
+        self.__config = data
+        ...
+
+    def collect_operation(self):
+        result_list = list()
+        for key, value in self.__config["operations"].items():
+            result_list.append(key)
+
+        return result_list

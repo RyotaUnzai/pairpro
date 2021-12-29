@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
+from __future__ import annotations
+
+import json
 import os
+import typing as tp
 
 
 class model(object):
@@ -24,3 +28,10 @@ class model(object):
         print("new_name", new_name)
 
         return new_name
+
+    def load_json(self, path) -> tp.Dict[str]:
+        with open(path, mode="r", encoding="utf-8") as f:
+            data = json.load(f)
+            return data
+
+        ...

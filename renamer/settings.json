@@ -1,0 +1,52 @@
+{
+    "operations": {
+        "replace": {
+            "gui": "replace",
+            "mode": "replace"
+        },
+        "suffix": {
+            "gui": "suffix",
+            "mode": "fix"
+        },
+        "prefix": {
+            "gui": "prefix",
+            "mode": "fix"
+        },
+        "consecutiveNumber": {
+            "gui": "consecutiveNumber",
+            "mode": "consecutiveNumber"
+        },
+        "lowerCase": {
+            "gui": "lowerCase",
+            "mode": "solo"
+        },
+        "upperCase": {
+            "gui": "upperCase",
+            "mode": "solo"
+        },
+        "capitalCase": {
+            "gui": "capitalCase",
+            "mode": "solo"
+        },
+        "camelCase": {
+            "gui": "camelCase",
+            "mode": "solo"
+        },
+        "snakeCase": {
+            "gui": "camelCase",
+            "mode": "solo"
+        },
+        "katakanaCase": {
+            "gui": "katakanaCase",
+            "mode": "solo"
+        },
+        "hiraganaCase": {
+            "gui": "hiraganaCase",
+            "mode": "solo"
+        },
+        "romajiCase": {
+            "gui": "romajiCase",
+            "mode": "solo"
+        }
+    }
+}
