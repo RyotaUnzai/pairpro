@@ -59,53 +59,47 @@ class delegate(delegateAttr):
     def __initUI(self):
         """UI初期化
         """
-        
+
         self.load_config()
         self.__initCentralWidgetUI()
         self.consecutiveNumber()
 
     def __initCentralWidgetUI(self):
-        self.centralWidget.frame_replace.hide()
-        self.centralWidget.frame_fix.hide()
-        self.centralWidget.frame_consecutiveNumber.hide()
-
         self.centralWidget.button_apply.clicked.connect(self.rename)
         self.listModel.setStringList(self.collect_operation())
         self.centralWidget.combo_mode.setModel(self.listModel)
         self.centralWidget.combo_mode.currentTextChanged.connect(self.changeLayout)
+        self.changeLayout()
 
+    def __hide_all_frame(self):
+        self.centralWidget.frame_replace.hide()
+        self.centralWidget.frame_fix.hide()
+        self.centralWidget.frame_consecutiveNumber.hide()
 
-
-        
     def changeLayout(self):
-        operation_mode = self.model.getOperationMode(
-            self.centralWidget.combo_mode.currentText()
-        )
-        frame_mode = f"frame_{OperationMode}"
+        self.__hide_all_frame()
 
-        f"self.centralWidget.{frame_mode}.show()"
+        operation_mode = self.model.getOperationMode(self.centralWidget.combo_mode.currentText())
+        frame_mode = f"frame_{operation_mode}"
+
+        frame = getattr(self.centralWidget, frame_mode, None)
+        if not frame:
+            return
+
+        frame.show()
+
+        # f"self.centralWidget.{frame_mode}.show()"
 
     def rename(self):
         """リネーム
         """
+        operation_mode = self.centralWidget.combo_mode.currentText()
         base_file_path = self.centralWidget.lineedit_base_file.text()
 
-        # TODO: modelに移行予定
-        new = self.centralWidget.lineedit_new.text()
-        old = self.centralWidget.lineedit_old.text()
-        print("base_file_path", base_file_path)
-        print("new", new)
-        print("old", old)
-
-        base_name, ext = os.path.splitext(os.path.basename(base_file_path))
-        base_dir = os.path.dirname(base_file_path)
-
-        new_name = self.model.replace(base_name, old, new)
-        new_file_path = os.path.join(base_dir, f"{new_name}{ext}")
-
-        result = self.model.rename(base_file_path, new_file_path)
-        print("result", result)
-        ...
+        if operation_mode == "replace":
+            self.model.replace(base_file_path,
+                               self.centralWidget.lineedit_old,
+                               self.centralWidget.lineedit_new)
 
     def consecutiveNumber(self):
         """連番
@@ -116,9 +110,14 @@ class delegate(delegateAttr):
         base_name, ext = os.path.splitext(os.path.basename(base_file_path))
         base_dir = os.path.dirname(base_file_path)
 
-        new_name = self.model.consecutiveNumber(base_name, 1, 3)
+        new_name = self.model.consecutiveNumber_old(base_name, 1, 3)
 
         new_file_path = os.path.join(base_dir, f"{new_name}{ext}")
+
+        self.model.consecutiveNumber(base_file_path,
+                                     self.centralWidget.lineedit_between,
+                                     self.centralWidget.spinbox_number)
+
         print("new_file_path", new_file_path)
 
     def load_config(self):

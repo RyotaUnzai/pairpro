@@ -5,6 +5,8 @@ import json
 import os
 import typing as tp
 
+from PySide2.QtWidgets import QLineEdit, QSpinBox
+
 
 class model(object):
     def __init__(self, *args, **kwargs):
@@ -17,26 +19,60 @@ class model(object):
         os.rename(base_file_path, new_file_path)
         return new_file_path
 
-    def replace(self, base, old, new):
-        return base.replace(old, new)
+    def replace(self, base_file_path, lineedit_old: QLineEdit, lineedit_new: QLineEdit):
+        base_name, ext = os.path.splitext(os.path.basename(base_file_path))
+        base_dir = os.path.dirname(base_file_path)
 
-    def consecutiveNumber(self, base, index, digits):
+        new = lineedit_new.text()
+        old = lineedit_old.text()
+
+        print("base_file_path", base_file_path)
+        print("new", new)
+        print("old", old)
+
+        new_name = base_name.replace(old, new)
+        new_file_path = os.path.join(base_dir, f"{new_name}{ext}")
+        result = self.rename(base_file_path, new_file_path)
+
+        print("result", result)
+        return base_name.replace(old, new)
+
+    # def consecutiveNumber_old(self, base, index, digits):
+    #     digits_number = f"{index:0>{digits}}"
+
+    #     new_name = base + digits_number
+    #     print("digits_number", digits_number)
+    #     print("new_name", new_name)
+
+    #     return new_name
+
+    def consecutiveNumber(self, base_file_path: str, line_edit: QLineEdit, zero_padding: QSpinBox, number: QSpinBox):
+        # GUIの値を取る
+        base_name, ext = os.path.splitext(os.path.basename(base_file_path))
+        base_dir = os.path.dirname(base_file_path)
+
+        between_text = line_edit.text()
+        index = zero_padding.value()
+        digits = number.value()
+
         digits_number = f"{index:0>{digits}}"
 
-        new_name = base + digits_number
+        new_name = base_name + between_text + digits_number
+        print("between_text", between_text)
         print("digits_number", digits_number)
         print("new_name", new_name)
 
-        return new_name
+        new_file_path = os.path.join(base_dir, f"{new_name}{ext}")
+
+        return new_file_path
+        ...
 
     def load_json(self, path) -> tp.Dict[str]:
         with open(path, mode="r", encoding="utf-8") as f:
-            self.__config  = json.load(f)
+            self.__config = json.load(f)
             return self.__config
 
         ...
 
     def getOperationMode(self, operationName):
         return self.__config["operations"][operationName]["mode"]
-
-
