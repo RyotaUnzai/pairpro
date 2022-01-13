@@ -33,7 +33,7 @@
      <item>
       <widget class="QLineEdit" name="lineedit_base_file">
        <property name="text">
-        <string>D:\python\pairpro\renamer\sample\tx_apple.fbx</string>
+        <string>renamer\sample\tx_apple.fbx</string>
        </property>
       </widget>
      </item>
@@ -89,10 +89,31 @@
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout_3">
       <item>
-       <widget class="QLineEdit" name="lineedit_between"/>
+       <widget class="QLineEdit" name="lineedit_between">
+        <property name="text">
+         <string>_</string>
+        </property>
+       </widget>
       </item>
       <item>
-       <widget class="QSpinBox" name="spinbox_number"/>
+       <widget class="QSpinBox" name="spinbox_zero_padding">
+        <property name="minimum">
+         <number>1</number>
+        </property>
+        <property name="value">
+         <number>5</number>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QSpinBox" name="spinbox_digits">
+        <property name="minimum">
+         <number>0</number>
+        </property>
+        <property name="value">
+         <number>1</number>
+        </property>
+       </widget>
       </item>
      </layout>
     </widget>

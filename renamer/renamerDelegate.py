@@ -62,7 +62,6 @@ class delegate(delegateAttr):
 
         self.load_config()
         self.__initCentralWidgetUI()
-        self.consecutiveNumber()
 
     def __initCentralWidgetUI(self):
         self.centralWidget.button_apply.clicked.connect(self.rename)
@@ -97,33 +96,24 @@ class delegate(delegateAttr):
         base_file_path = self.centralWidget.lineedit_base_file.text()
 
         if operation_mode == "replace":
-            self.model.replace(base_file_path,
-                               self.centralWidget.lineedit_old,
-                               self.centralWidget.lineedit_new)
+            new_path = self.model.replace(base_file_path,
+                                          self.centralWidget.lineedit_old,
+                                          self.centralWidget.lineedit_new)
 
-    def consecutiveNumber(self):
-        """連番
-        """
-        base_file_path = self.centralWidget.lineedit_base_file.text()
+        elif operation_mode == "consecutiveNumber":
+            new_path = self.model.consecutiveNumber(base_file_path,
+                                                    self.centralWidget.lineedit_between,
+                                                    self.centralWidget.spinbox_digits,
+                                                    self.centralWidget.spinbox_zero_padding)
 
-        # GUIの値を取る
-        base_name, ext = os.path.splitext(os.path.basename(base_file_path))
-        base_dir = os.path.dirname(base_file_path)
+        elif operation_mode == "prefix":
+            new_path = self.model.prefix(base_file_path, self.centralWidget.lineedit_fix)
 
-        new_name = self.model.consecutiveNumber_old(base_name, 1, 3)
-
-        new_file_path = os.path.join(base_dir, f"{new_name}{ext}")
-
-        self.model.consecutiveNumber(base_file_path,
-                                     self.centralWidget.lineedit_between,
-                                     self.centralWidget.spinbox_number)
-
-        print("new_file_path", new_file_path)
+        self.model.rename(base_file_path, new_path)
 
     def load_config(self):
         data = self.model.load_json("renamer/settings.json")
         self.__config = data
-        ...
 
     def collect_operation(self):
         result_list = list()
