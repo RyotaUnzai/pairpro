@@ -107,9 +107,22 @@ class delegate(delegateAttr):
                                                     self.centralWidget.spinbox_zero_padding)
 
         elif operation_mode == "prefix":
-            new_path = self.model.prefix(base_file_path, self.centralWidget.lineedit_fix)
+            new_path = self.model.fix(base_file_path,
+                                      self.centralWidget.lineedit_fix,
+                                      is_prefix=True)
+        elif operation_mode == "suffix":
+            new_path = self.model.fix(base_file_path,
+                                      self.centralWidget.lineedit_fix)
+        elif operation_mode == "upperCase":
+            new_path = self.model.upperCase(base_file_path)
+        elif operation_mode == "lowerCase":
+            new_path = self.model.lowerCase(base_file_path)
+        elif operation_mode == "capitalCase":
+            new_path = self.model.capitalCase(base_file_path)
+        elif operation_mode == "titleCase":
+            new_path = self.model.titleCase(base_file_path)
 
-        self.model.rename(base_file_path, new_path)
+        self.centralWidget.lineedit_base_file.setText(self.model.rename(base_file_path, new_path))
 
     def load_config(self):
         data = self.model.load_json("renamer/settings.json")

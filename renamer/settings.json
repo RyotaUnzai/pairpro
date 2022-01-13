@@ -28,6 +28,10 @@
             "gui": "capitalCase",
             "mode": "solo"
         },
+        "titleCase": {
+            "gui": "titleCase",
+            "mode": "solo"
+        },
         "camelCase": {
             "gui": "camelCase",
             "mode": "solo"

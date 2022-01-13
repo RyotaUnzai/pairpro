@@ -55,28 +55,62 @@ class model(object):
 
         return new_file_path
 
-    def fix(self, base_file_path: str, string_edit: QLineEdit, is_prefix):
+    def fix(self, base_file_path: str, string_edit: QLineEdit, is_prefix=False):
         base_dir, base_name, ext = model._separate_file_path(base_file_path)
-
-        prefix_text = string_edit.text()
+        fix_text = string_edit.text()
 
         if is_prefix:
-            return self.prefix(base_file_path, string_edit)
+            new_name = self.prefix(fix_text, base_name)
+        else:
+            new_name = self.suffix(fix_text, base_name)
+        new_file_path = os.path.join(base_dir, f"{new_name}{ext}")
+        return new_file_path
 
-        return self.suffix(base_file_path, string_edit)
-        ...
-
-    def prefix(self, base_file_path: str, string_edit: QLineEdit):
+    def prefix(self, fix_text: str, base_name: str):
         """接頭辞
         """
+        return f"{fix_text}{base_name}"
+
+    def suffix(self, fix_text: str, base_name: str):
+        """接尾辞
+        """
+        return f"{base_name}{fix_text}"
+
+    def upperCase(self, base_file_path: str):
+        """小文字→大文字
+        """
+
         base_dir, base_name, ext = model._separate_file_path(base_file_path)
-
-        prefix_text = string_edit.text()
-
-        new_name = f"{prefix_text}{base_name}"
+        new_name = base_name.upper()
         new_file_path = os.path.join(base_dir, f"{new_name}{ext}")
+        return new_file_path
 
-        return new_name
+    def lowerCase(self, base_file_path: str):
+        """大文字→小文字
+        """
+
+        base_dir, base_name, ext = model._separate_file_path(base_file_path)
+        new_name = base_name.lower()
+        new_file_path = os.path.join(base_dir, f"{new_name}{ext}")
+        return new_file_path
+
+    def capitalCase(self, base_file_path: str):
+        """先頭大文字
+        """
+
+        base_dir, base_name, ext = model._separate_file_path(base_file_path)
+        new_name = base_name.capitalize()
+        new_file_path = os.path.join(base_dir, f"{new_name}{ext}")
+        return new_file_path
+
+    def titleCase(self, base_file_path: str):
+        """先頭大文字
+        """
+
+        base_dir, base_name, ext = model._separate_file_path(base_file_path)
+        new_name = base_name.title()
+        new_file_path = os.path.join(base_dir, f"{new_name}{ext}")
+        return new_file_path
 
     @classmethod
     def _separate_file_path(cls, base_file_path) -> tp.Tuple(str, str, str):
